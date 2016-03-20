@@ -1,0 +1,35 @@
+<h2>Listing gifs</h2>
+<%= form_for nil, <%= gif_path(@conn, :search), fn f -> %>
+  <%= label f, :search, class: "control-label" %>
+  <%= search_input f, :search, class: "form-control" %>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Points</th>
+      <th>Tags</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for gif <- @gifs do %>
+    <tr>
+      <td><%= gif.name %></td>
+      <td><%= gif.url %></td>
+      <td><%= gif.points %></td>
+      <td><%= gif.tags %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: gif_path(@conn, :show, gif), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: gif_path(@conn, :edit, gif), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: gif_path(@conn, :delete, gif), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New gif", to: gif_path(@conn, :new) %>

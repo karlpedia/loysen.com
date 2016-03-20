@@ -1,0 +1,28 @@
+<h2>Show gif</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @gif.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @gif.url %>
+  </li>
+
+  <li>
+    <strong>Points:</strong>
+    <%= @gif.points %>
+  </li>
+
+  <li>
+    <strong>Tags:</strong>
+    <%= @gif.tags %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: gif_path(@conn, :edit, @gif) %>
+<%= link "Back", to: gif_path(@conn, :index) %>

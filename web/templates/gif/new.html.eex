@@ -1,0 +1,6 @@
+<h2>New gif</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: gif_path(@conn, :create) %>
+
+<%= link "Back", to: gif_path(@conn, :index) %>
