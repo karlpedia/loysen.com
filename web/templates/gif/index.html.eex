@@ -1,8 +1,11 @@
 <h2>Listing gifs</h2>
-<%= form_for nil, <%= gif_path(@conn, :search), fn f -> %>
-  <%= label f, :search, class: "control-label" %>
-  <%= search_input f, :search, class: "form-control" %>
-<% end %>
+<form action="<%= gif_path(@conn, :index) %>" method="get">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input type="text" name="search" class="form-control" />
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
 <table class="table">
   <thead>
     <tr>
