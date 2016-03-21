@@ -5,6 +5,13 @@ defmodule Loysen.GifController do
 
   plug :scrub_params, "gif" when action in [:create, :update]
 
+  def index(conn, %{"search" => queryString}) do
+    likeString = [queryString, "%"] |> Enum.join
+    query = from g in Gif, where: ilike(g.name, ^likeString)
+    gifs = Repo.all(query)
+    render(conn, "index.html", gifs: gifs)
+  end
+
   def index(conn, _params) do
     gifs = Repo.all(Gif)
     render(conn, "index.html", gifs: gifs)
