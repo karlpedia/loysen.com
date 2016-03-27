@@ -2,7 +2,7 @@
 <form action="<%= gif_path(@conn, :index) %>" method="get">
   <div class="form-group">
     <label for="search">Search</label>
-    <input type="text" name="search" class="form-control" />
+    <input type="text" name="search" class="form-control" value="<%= @query %>" />
   </div>
   <button type="submit" class="btn btn-primary">Search</button>
 </form>
