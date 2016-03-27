@@ -9,12 +9,18 @@ defmodule Loysen.GifController do
     likeString = [queryString, "%"] |> Enum.join
     query = from g in Gif, where: ilike(g.name, ^likeString)
     gifs = Repo.all(query)
-    render(conn, "index.html", gifs: gifs)
+    conn 
+    |> assign(:gifs, gifs)
+    |> assign(:query, queryString)
+    |> render("index.html")
   end
 
   def index(conn, _params) do
     gifs = Repo.all(Gif)
-    render(conn, "index.html", gifs: gifs)
+    conn
+    |> assign(:gifs, gifs)
+    |> assign(:query, "")
+    |> render("index.html")
   end
 
   def new(conn, _params) do
