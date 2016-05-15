@@ -6,11 +6,12 @@ defmodule Loysen.Gif do
     field :url, :string
     field :points, :integer
     field :tags, {:array, :string}
+    field :nsfw, :boolean
 
     timestamps
   end
 
-  @required_fields ~w(name url points)
+  @required_fields ~w(name url points nsfw)
   @optional_fields ~w(tags)
 
   @doc """
