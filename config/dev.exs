@@ -36,7 +36,7 @@ config :phoenix, :stacktrace_depth, 20
 config :loysen, Loysen.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "test",
+  password: "password",
   database: "loysen_dev",
   hostname: "localhost",
   pool_size: 10

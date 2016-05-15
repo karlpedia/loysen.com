@@ -12,6 +12,7 @@
       <th>Name</th>
       <th>Url</th>
       <th>Points</th>
+      <th>NSfW</th>
       <th>Tags</th>
 
       <th></th>
@@ -23,6 +24,7 @@
       <td><%= gif.name %></td>
       <td><%= gif.url %></td>
       <td><%= gif.points %></td>
+      <td><%= gif.nsfw %></td>
       <td><%= gif.tags %></td>
 
       <td class="text-right">
