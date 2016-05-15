@@ -3,6 +3,8 @@
   <div class="form-group">
     <label for="search">Search</label>
     <input type="text" name="search" class="form-control" value="<%= @query %>" />
+    <label for="ignoreNSFW">Ignore NSFW</label>
+    <input type="checkbox" name="ignoreNSFW" class="form-control" value="<%= @ignoreNSFW %>" />
   </div>
   <button type="submit" class="btn btn-primary">Search</button>
 </form>

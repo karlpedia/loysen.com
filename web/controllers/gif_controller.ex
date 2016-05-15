@@ -5,22 +5,41 @@ defmodule Loysen.GifController do
 
   plug :scrub_params, "gif" when action in [:create, :update]
 
-  def index(conn, %{"search" => queryString}) do
-    likeString = [queryString, "%"] |> Enum.join
-    query = from g in Gif, where: ilike(g.name, ^likeString)
-    gifs = Repo.all(query)
-    conn 
-    |> assign(:gifs, gifs)
-    |> assign(:query, queryString)
-    |> render("index.html")
-  end
+  @optional_params %{"search" => "", "ignoreNSFW" => false}
 
-  def index(conn, _params) do
-    gifs = Repo.all(Gif)
+  def index(conn, params) do
+    params = Map.merge(@optional_params, params)
+    search = Map.get(params, "search");
+    ignoreNSFW = Map.get(params, "ignoreNSFW")
+
+    gifs = Gif
+    |> nameSearch(search)
+    |> filterNSFW(ignoreNSFW)
+    |> Repo.all
+
     conn
     |> assign(:gifs, gifs)
-    |> assign(:query, "")
+    |> assign(:query, search)
+    |> assign(:ignoreNSFW, true)
     |> render("index.html")
+  end
+  
+  defp nameSearch(query, "") do
+    query
+  end
+
+  defp nameSearch(query, queryString) do
+    likeString = [queryString, "%"] |> Enum.join
+    from g in query, where: ilike(g.name, ^likeString)
+  end
+
+  defp filterNSFW(query, ignoreNSFW) do
+    if ignoreNSFW do
+        from g in query,
+        where: g.nsfw == false
+    else
+        query
+    end
   end
 
   def new(conn, _params) do
